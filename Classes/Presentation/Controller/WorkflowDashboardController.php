@@ -69,10 +69,10 @@ class WorkflowDashboardController extends ActionController
             $definition = WorkflowDefinition::fromArray(
                 json_decode($definitionJson, true, 512, JSON_THROW_ON_ERROR),
             );
-            foreach ($definition->steps as $step) {
+            foreach ($definition->steps as $stepDefinition) {
                 $steps[] = [
-                    'id' => $step->id,
-                    'type' => $step->type,
+                    'id' => $stepDefinition->id,
+                    'type' => $stepDefinition->type,
                     'status' => 'pending',
                     'message' => '',
                     'output' => [],
