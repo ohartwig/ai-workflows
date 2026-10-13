@@ -1,0 +1,53 @@
+categories:
+  aiWorkflows:
+    label: 'AI Workflows'
+  aiWorkflows.general:
+    label: 'General'
+    parent: aiWorkflows
+  aiWorkflows.notifications:
+    label: 'Notifications'
+    parent: aiWorkflows
+
+settings:
+  aiWorkflows.defaultReviewTimeout:
+    label: 'Default Review Timeout (seconds)'
+    description: 'Time in seconds before a review task times out'
+    type: int
+    default: 86400
+    category: aiWorkflows.general
+  aiWorkflows.workflowDirectory:
+    label: 'Workflow Directory'
+    description: 'Path to the directory containing workflow YAML definitions'
+    type: string
+    default: 'EXT:ai_workflows/Resources/Private/Workflows/'
+    category: aiWorkflows.general
+  aiWorkflows.notifications.email.enabled:
+    label: 'Enable Email Notifications'
+    type: bool
+    default: false
+    category: aiWorkflows.notifications
+  aiWorkflows.notifications.email.senderAddress:
+    label: 'Email Sender Address'
+    type: string
+    default: ''
+    category: aiWorkflows.notifications
+  aiWorkflows.notifications.email.senderName:
+    label: 'Email Sender Name'
+    type: string
+    default: 'AI Workflows'
+    category: aiWorkflows.notifications
+  aiWorkflows.notifications.slack.enabled:
+    label: 'Enable Slack Notifications'
+    type: bool
+    default: false
+    category: aiWorkflows.notifications
+  aiWorkflows.notifications.slack.webhookUrl:
+    label: 'Slack Webhook URL'
+    type: string
+    default: ''
+    category: aiWorkflows.notifications
+  aiWorkflows.notifications.backend.enabled:
+    label: 'Enable Backend Notifications'
+    type: bool
+    default: true
+    category: aiWorkflows.notifications

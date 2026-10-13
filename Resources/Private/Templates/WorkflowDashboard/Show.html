@@ -1,0 +1,144 @@
+<html data-namespace-typo3-fluid="true"
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
+<f:layout name="Default" />
+<f:section name="Content">
+    <h1>{f:translate(key: 'LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:show.workflowLabel')} {instance.workflowName}</h1>
+
+    <div class="row">
+        <div class="col-md-8">
+            <!-- Status Overview -->
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:table.status" /></span>
+                    <f:render partial="WorkflowStatus" arguments="{status: instance.status}" />
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3"><strong><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:show.instanceId" /></strong></div>
+                        <div class="col-sm-9">{instance.uid}</div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-sm-3"><strong><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:table.startedAt" /></strong></div>
+                        <div class="col-sm-9"><f:format.date format="Y-m-d H:i:s">{instance.startedAt}</f:format.date></div>
+                    </div>
+                    <f:if condition="{instance.completedAt}">
+                        <div class="row mt-1">
+                            <div class="col-sm-3"><strong><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:table.completedAt" /></strong></div>
+                            <div class="col-sm-9"><f:format.date format="Y-m-d H:i:s">{instance.completedAt}</f:format.date></div>
+                        </div>
+                    </f:if>
+                    <f:if condition="{instance.errorMessage}">
+                        <div class="row mt-2">
+                            <div class="col-sm-3"><strong><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:table.error" /></strong></div>
+                            <div class="col-sm-9"><span class="text-danger">{instance.errorMessage -> f:format.htmlspecialchars()}</span></div>
+                        </div>
+                    </f:if>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <f:if condition="{totalSteps}">
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between mb-1">
+                        <small><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:show.progress" /></small>
+                        <small>{completedSteps} / {totalSteps} <f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:show.progressSteps" /></small>
+                    </div>
+                    <div class="progress" style="height: 8px;">
+                        <f:switch expression="{instance.status}">
+                            <f:case value="failed">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {progressPercent}%"></div>
+                            </f:case>
+                            <f:case value="completed">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
+                            </f:case>
+                            <f:case value="paused">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: {progressPercent}%"></div>
+                            </f:case>
+                            <f:defaultCase>
+                                <div class="progress-bar" role="progressbar" style="width: {progressPercent}%"></div>
+                            </f:defaultCase>
+                        </f:switch>
+                    </div>
+                </div>
+            </f:if>
+
+            <!-- Step List -->
+            <f:if condition="{steps}">
+                <div class="card mb-4">
+                    <div class="card-header"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:show.steps" /></div>
+                    <div class="list-group list-group-flush">
+                        <f:for each="{steps}" as="step" iteration="iter">
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <f:switch expression="{step.status}">
+                                            <f:case value="completed"><span class="badge bg-success me-2"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:status.completed" /></span></f:case>
+                                            <f:case value="failed"><span class="badge bg-danger me-2"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:status.failed" /></span></f:case>
+                                            <f:case value="skipped"><span class="badge bg-secondary me-2"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:status.skipped" /></span></f:case>
+                                            <f:case value="blocked"><span class="badge bg-warning me-2"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:status.blocked" /></span></f:case>
+                                            <f:case value="running"><span class="badge bg-primary me-2"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:status.running" /></span></f:case>
+                                            <f:defaultCase><span class="badge bg-light text-dark me-2"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:status.pending" /></span></f:defaultCase>
+                                        </f:switch>
+                                        <strong>{step.id}</strong>
+                                        <span class="text-body-secondary ms-2">({step.type})</span>
+                                    </div>
+                                    <span class="text-body-secondary">#{iter.cycle}</span>
+                                </div>
+
+                                <f:if condition="{step.message}">
+                                    <div class="mt-1">
+                                        <small class="text-body-secondary">{step.message -> f:format.htmlspecialchars()}</small>
+                                    </div>
+                                </f:if>
+
+                                <f:if condition="{step.output}">
+                                    <details class="mt-2">
+                                        <summary><small><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:show.output" /></small></summary>
+                                        <pre class="mt-1 p-2 bg-body-tertiary rounded" style="max-height: 200px; overflow: auto; font-size: 0.8rem;"><f:format.htmlspecialchars><f:format.json>{step.output}</f:format.json></f:format.htmlspecialchars></pre>
+                                    </details>
+                                </f:if>
+                            </div>
+                        </f:for>
+                    </div>
+                </div>
+            </f:if>
+        </div>
+
+        <div class="col-md-4">
+            <!-- Input Data -->
+            <f:if condition="{inputData}">
+                <div class="card mb-4">
+                    <div class="card-header"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:show.input" /></div>
+                    <div class="card-body">
+                        <f:for each="{inputData}" as="value" key="key">
+                            <div class="mb-2">
+                                <small class="text-body-secondary d-block">{key}</small>
+                                <span class="text-break">{value -> f:format.htmlspecialchars()}</span>
+                            </div>
+                        </f:for>
+                    </div>
+                </div>
+            </f:if>
+
+            <!-- Output Data -->
+            <f:if condition="{outputData}">
+                <div class="card mb-4">
+                    <div class="card-header"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:show.outputs" /></div>
+                    <div class="card-body">
+                        <f:for each="{outputData}" as="stepOutput" key="stepId">
+                            <div class="mb-3">
+                                <strong>{stepId}</strong>
+                                <pre class="mt-1 p-2 bg-body-tertiary rounded" style="max-height: 150px; overflow: auto; font-size: 0.8rem;"><f:format.htmlspecialchars><f:format.json>{stepOutput}</f:format.json></f:format.htmlspecialchars></pre>
+                            </div>
+                        </f:for>
+                    </div>
+                </div>
+            </f:if>
+        </div>
+    </div>
+
+    <div class="mt-2">
+        <f:link.action action="index" class="btn btn-default"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:button.backToDashboard" /></f:link.action>
+    </div>
+</f:section>
+</html>

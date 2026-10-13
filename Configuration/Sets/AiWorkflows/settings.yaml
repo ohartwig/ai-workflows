@@ -1,0 +1,13 @@
+aiWorkflows:
+  defaultReviewTimeout: 86400
+  workflowDirectory: 'EXT:ai_workflows/Resources/Private/Workflows/'
+  notifications:
+    email:
+      enabled: false
+      senderAddress: ''
+      senderName: 'AI Workflows'
+    slack:
+      enabled: false
+      webhookUrl: ''
+    backend:
+      enabled: true

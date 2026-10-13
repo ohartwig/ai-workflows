@@ -1,0 +1,71 @@
+name: Multi-Channel Publication
+description: Transform content for multiple channels and distribute
+trigger:
+  type: manual
+
+inputs:
+  content:
+    type: text
+    label: Content
+    description: The article or content text to transform and publish across channels
+    required: true
+    placeholder: "Paste your article text here..."
+  platform:
+    type: select
+    label: Social Media Platform
+    description: Primary social media platform for the social channel transform
+    required: false
+    default: twitter
+    options:
+      - twitter
+      - linkedin
+      - mastodon
+      - bluesky
+
+steps:
+  transform_web:
+    type: channel_transform
+    parameters:
+      content: "{{ input.content }}"
+      channel: web
+      options:
+        format: html
+
+  transform_social:
+    type: channel_transform
+    parameters:
+      content: "{{ input.content }}"
+      channel: social
+      options:
+        platform: "{{ input.platform }}"
+        maxLength: 280
+
+  transform_newsletter:
+    type: channel_transform
+    parameters:
+      content: "{{ input.content }}"
+      channel: newsletter
+      options:
+        format: mjml
+
+  review:
+    type: human_review
+    parameters:
+      title: "Review Multi-Channel Content"
+      description: "Review the transformed content for all channels before distribution."
+      content: "{{ steps.transform_web.output.content }}"
+      deadline: 43200
+
+  distribute_all:
+    type: distribute
+    parameters:
+      content: "{{ input.content }}"
+      targets:
+        - web
+        - social
+        - newsletter
+
+notifications:
+  on_complete:
+    channel: backend
+    message: "Multi-channel publication completed"

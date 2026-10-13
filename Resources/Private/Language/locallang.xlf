@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-03-23T00:00:00Z" product-name="ai_workflows">
+        <header/>
+        <body>
+            <trans-unit id="tx_aiworkflows_workflow_instance" resname="tx_aiworkflows_workflow_instance"><source>Workflow Instance</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_workflow_instance.workflow_name" resname="tx_aiworkflows_workflow_instance.workflow_name"><source>Workflow Name</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_workflow_instance.workflow_definition" resname="tx_aiworkflows_workflow_instance.workflow_definition"><source>Workflow Definition</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_workflow_instance.status" resname="tx_aiworkflows_workflow_instance.status"><source>Status</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_workflow_instance.current_step" resname="tx_aiworkflows_workflow_instance.current_step"><source>Current Step</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_workflow_instance.context_data" resname="tx_aiworkflows_workflow_instance.context_data"><source>Context Data</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_workflow_instance.input_data" resname="tx_aiworkflows_workflow_instance.input_data"><source>Input Data</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_workflow_instance.output_data" resname="tx_aiworkflows_workflow_instance.output_data"><source>Output Data</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_workflow_instance.started_by" resname="tx_aiworkflows_workflow_instance.started_by"><source>Started By</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_workflow_instance.started_at" resname="tx_aiworkflows_workflow_instance.started_at"><source>Started At</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_workflow_instance.completed_at" resname="tx_aiworkflows_workflow_instance.completed_at"><source>Completed At</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_workflow_instance.error_message" resname="tx_aiworkflows_workflow_instance.error_message"><source>Error Message</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_review_task" resname="tx_aiworkflows_review_task"><source>Review Task</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_review_task.workflow_instance" resname="tx_aiworkflows_review_task.workflow_instance"><source>Workflow Instance</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_review_task.step_id" resname="tx_aiworkflows_review_task.step_id"><source>Step ID</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_review_task.title" resname="tx_aiworkflows_review_task.title"><source>Title</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_review_task.description" resname="tx_aiworkflows_review_task.description"><source>Description</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_review_task.content_data" resname="tx_aiworkflows_review_task.content_data"><source>Content Data</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_review_task.status" resname="tx_aiworkflows_review_task.status"><source>Status</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_review_task.reviewer" resname="tx_aiworkflows_review_task.reviewer"><source>Reviewer</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_review_task.review_comment" resname="tx_aiworkflows_review_task.review_comment"><source>Review Comment</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_review_task.deadline" resname="tx_aiworkflows_review_task.deadline"><source>Deadline</source></trans-unit>
+            <trans-unit id="tx_aiworkflows_review_task.reviewed_at" resname="tx_aiworkflows_review_task.reviewed_at"><source>Reviewed At</source></trans-unit>
+
+            <!-- Dashboard: Index -->
+            <trans-unit id="dashboard.title" resname="dashboard.title"><source>AI Workflows Dashboard</source></trans-unit>
+            <trans-unit id="dashboard.availableWorkflows" resname="dashboard.availableWorkflows"><source>Available Workflows</source></trans-unit>
+            <trans-unit id="dashboard.runningWorkflows" resname="dashboard.runningWorkflows"><source>Running Workflows</source></trans-unit>
+            <trans-unit id="dashboard.pausedWorkflows" resname="dashboard.pausedWorkflows"><source>Paused Workflows (Awaiting Review)</source></trans-unit>
+            <trans-unit id="dashboard.noWorkflowDefinitions" resname="dashboard.noWorkflowDefinitions"><source>No workflow definitions found.</source></trans-unit>
+            <trans-unit id="dashboard.noRunningWorkflows" resname="dashboard.noRunningWorkflows"><source>No running workflows.</source></trans-unit>
+            <trans-unit id="dashboard.noPausedWorkflows" resname="dashboard.noPausedWorkflows"><source>No paused workflows.</source></trans-unit>
+
+            <!-- Dashboard: Show -->
+            <trans-unit id="show.workflowLabel" resname="show.workflowLabel"><source>Workflow:</source></trans-unit>
+            <trans-unit id="show.instanceId" resname="show.instanceId"><source>Instance ID</source></trans-unit>
+            <trans-unit id="show.progress" resname="show.progress"><source>Progress</source></trans-unit>
+            <trans-unit id="show.progressSteps" resname="show.progressSteps"><source>steps</source></trans-unit>
+            <trans-unit id="show.steps" resname="show.steps"><source>Steps</source></trans-unit>
+            <trans-unit id="show.output" resname="show.output"><source>Output</source></trans-unit>
+            <trans-unit id="show.input" resname="show.input"><source>Input</source></trans-unit>
+            <trans-unit id="show.outputs" resname="show.outputs"><source>Outputs</source></trans-unit>
+
+            <!-- Dashboard: Start -->
+            <trans-unit id="start.title" resname="start.title"><source>Start Workflow</source></trans-unit>
+            <trans-unit id="start.workflowLabel" resname="start.workflowLabel"><source>Workflow</source></trans-unit>
+            <trans-unit id="start.inputParameters" resname="start.inputParameters"><source>Input Parameters</source></trans-unit>
+            <trans-unit id="start.selectPlaceholder" resname="start.selectPlaceholder"><source>— Select —</source></trans-unit>
+            <trans-unit id="start.noInputParameters" resname="start.noInputParameters"><source>This workflow requires no input parameters.</source></trans-unit>
+            <trans-unit id="start.selectWorkflowHint" resname="start.selectWorkflowHint"><source>Select a workflow to see its input parameters.</source></trans-unit>
+            <trans-unit id="start.submitButton" resname="start.submitButton"><source>Start Workflow</source></trans-unit>
+
+            <!-- Review: Index -->
+            <trans-unit id="review.pendingReviews" resname="review.pendingReviews"><source>Pending Reviews</source></trans-unit>
+            <trans-unit id="review.noPendingReviews" resname="review.noPendingReviews"><source>No pending reviews. All caught up!</source></trans-unit>
+
+            <!-- Review: Show -->
+            <trans-unit id="review.showTitle" resname="review.showTitle"><source>Review:</source></trans-unit>
+            <trans-unit id="review.taskId" resname="review.taskId"><source>Task ID</source></trans-unit>
+            <trans-unit id="review.contentToReview" resname="review.contentToReview"><source>Content to Review</source></trans-unit>
+            <trans-unit id="review.comment" resname="review.comment"><source>Comment</source></trans-unit>
+            <trans-unit id="review.notFound" resname="review.notFound"><source>Review task not found.</source></trans-unit>
+
+            <!-- Table headers -->
+            <trans-unit id="table.name" resname="table.name"><source>Name</source></trans-unit>
+            <trans-unit id="table.description" resname="table.description"><source>Description</source></trans-unit>
+            <trans-unit id="table.trigger" resname="table.trigger"><source>Trigger</source></trans-unit>
+            <trans-unit id="table.actions" resname="table.actions"><source>Actions</source></trans-unit>
+            <trans-unit id="table.number" resname="table.number"><source>#</source></trans-unit>
+            <trans-unit id="table.workflow" resname="table.workflow"><source>Workflow</source></trans-unit>
+            <trans-unit id="table.currentStep" resname="table.currentStep"><source>Current Step</source></trans-unit>
+            <trans-unit id="table.startedAt" resname="table.startedAt"><source>Started At</source></trans-unit>
+            <trans-unit id="table.completedAt" resname="table.completedAt"><source>Completed At</source></trans-unit>
+            <trans-unit id="table.pausedAtStep" resname="table.pausedAtStep"><source>Paused At Step</source></trans-unit>
+            <trans-unit id="table.title" resname="table.title"><source>Title</source></trans-unit>
+            <trans-unit id="table.step" resname="table.step"><source>Step</source></trans-unit>
+            <trans-unit id="table.deadline" resname="table.deadline"><source>Deadline</source></trans-unit>
+            <trans-unit id="table.status" resname="table.status"><source>Status</source></trans-unit>
+            <trans-unit id="table.error" resname="table.error"><source>Error</source></trans-unit>
+
+            <!-- Buttons -->
+            <trans-unit id="button.start" resname="button.start"><source>Start</source></trans-unit>
+            <trans-unit id="button.details" resname="button.details"><source>Details</source></trans-unit>
+            <trans-unit id="button.review" resname="button.review"><source>Review</source></trans-unit>
+            <trans-unit id="button.approve" resname="button.approve"><source>Approve</source></trans-unit>
+            <trans-unit id="button.reject" resname="button.reject"><source>Reject</source></trans-unit>
+            <trans-unit id="button.cancel" resname="button.cancel"><source>Cancel</source></trans-unit>
+            <trans-unit id="button.backToDashboard" resname="button.backToDashboard"><source>Back to Dashboard</source></trans-unit>
+            <trans-unit id="button.backToReviews" resname="button.backToReviews"><source>Back to Reviews</source></trans-unit>
+
+            <!-- Status badges -->
+            <trans-unit id="status.pending" resname="status.pending"><source>Pending</source></trans-unit>
+            <trans-unit id="status.running" resname="status.running"><source>Running</source></trans-unit>
+            <trans-unit id="status.paused" resname="status.paused"><source>Paused</source></trans-unit>
+            <trans-unit id="status.completed" resname="status.completed"><source>Completed</source></trans-unit>
+            <trans-unit id="status.failed" resname="status.failed"><source>Failed</source></trans-unit>
+            <trans-unit id="status.cancelled" resname="status.cancelled"><source>Cancelled</source></trans-unit>
+            <trans-unit id="status.skipped" resname="status.skipped"><source>Skipped</source></trans-unit>
+            <trans-unit id="status.blocked" resname="status.blocked"><source>Blocked</source></trans-unit>
+        </body>
+    </file>
+</xliff>

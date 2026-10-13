@@ -1,0 +1,16 @@
+# The level and the rule set come from the shared standard in koh/dev, so a
+# change there reaches this repository too. Only the paths are local — the shared
+# file deliberately omits them, because a relative path in it would resolve
+# inside vendor/.
+#
+# What was here before: explicit includes of the strict-rules and phpstan-phpunit
+# neon files, which phpstan/extension-installer already registers. PHPStan then
+# aborted with "These files are included multiple times" and exit 1 without
+# analysing anything, so the static analysis had been reporting on a run that
+# never happened.
+includes:
+  - vendor/koh/dev-typo3/config/typo3/phpstan.neon
+
+parameters:
+  paths:
+    - Classes

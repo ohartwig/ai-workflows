@@ -1,0 +1,71 @@
+name: Content Creation Pipeline
+description: Generate content with AI, run quality checks, get human approval, then publish
+trigger:
+  type: manual
+
+inputs:
+  prompt:
+    type: text
+    label: Content Prompt
+    description: Describe what content should be generated
+    required: true
+    placeholder: "e.g. Write a blog post about sustainable web development"
+  model:
+    type: select
+    label: AI Model
+    description: Which AI model to use for generation
+    required: false
+    default: gpt-4
+    options:
+      - gpt-4
+      - gpt-4o
+      - claude-sonnet
+      - claude-opus
+
+steps:
+  generate_content:
+    type: ai_task
+    parameters:
+      prompt: "{{ input.prompt }}"
+      task_type: content_generation
+      expected_schema:
+        type: object
+        properties:
+          content:
+            type: string
+            description: The generated content text
+        required:
+          - content
+
+  quality_check:
+    type: quality_gate
+    parameters:
+      content: "{{ steps.generate_content.output.content }}"
+      checks:
+        - readability
+        - grammar
+        - seo
+      threshold: 0.8
+
+  human_review:
+    type: human_review
+    parameters:
+      title: "Review AI-Generated Content"
+      description: "Please review the AI-generated content for accuracy and brand alignment."
+      content: "{{ steps.generate_content.output.content }}"
+      deadline: 86400
+
+  publish:
+    type: distribute
+    parameters:
+      content: "{{ steps.generate_content.output.content }}"
+      targets:
+        - website
+
+notifications:
+  on_complete:
+    channel: backend
+    message: "Content creation workflow completed"
+  on_failure:
+    channel: backend
+    message: "Content creation workflow failed"

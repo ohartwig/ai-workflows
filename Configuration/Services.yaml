@@ -1,0 +1,55 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Koh\AiWorkflows\:
+    resource: '../Classes/*'
+    exclude:
+      - '../Classes/Domain/Model/*'
+      - '../Classes/Domain/Enum/*'
+
+  _instanceof:
+    Koh\AiWorkflows\Domain\Contract\StepInterface:
+      tags: ['aiworkflows.step']
+    Koh\AiWorkflows\Domain\Contract\NotifierInterface:
+      tags: ['aiworkflows.notifier']
+
+  Koh\AiWorkflows\Application\Service\StepExecutor:
+    arguments:
+      $steps: !tagged_iterator aiworkflows.step
+
+  Koh\AiWorkflows\Application\Service\NotificationDispatcher:
+    arguments:
+      $notifiers: !tagged_iterator aiworkflows.notifier
+
+  Koh\AiWorkflows\Domain\Contract\WorkflowInstanceRepositoryInterface:
+    alias: Koh\AiWorkflows\Infrastructure\Persistence\Repository\WorkflowInstanceRepository
+
+  Koh\AiWorkflows\Domain\Contract\ReviewTaskRepositoryInterface:
+    alias: Koh\AiWorkflows\Infrastructure\Persistence\Repository\ReviewTaskRepository
+
+  Koh\AiWorkflows\Domain\Contract\AiTaskRepositoryInterface:
+    alias: Koh\AiWorkflows\Infrastructure\Persistence\Repository\AiTaskRepository
+
+  Koh\AiWorkflows\Domain\Contract\ContentIntelligenceAdapterInterface:
+    alias: Koh\AiWorkflows\Infrastructure\Adapter\NullContentIntelligenceAdapter
+
+  Koh\AiWorkflows\Domain\Contract\SemanticDeliveryAdapterInterface:
+    alias: Koh\AiWorkflows\Infrastructure\Adapter\NullSemanticDeliveryAdapter
+
+  Koh\AiWorkflows\Domain\Contract\McpServerAdapterInterface:
+    alias: Koh\AiWorkflows\Infrastructure\Adapter\NullMcpServerAdapter
+
+  Koh\AiWorkflows\Domain\Contract\AiClientInterface:
+    alias: Koh\AiWorkflows\Infrastructure\Adapter\NullAiClient
+
+  Koh\AiWorkflows\Domain\Contract\WorkflowParserInterface:
+    alias: Koh\AiWorkflows\Infrastructure\Parser\WorkflowParser
+
+  Koh\AiWorkflows\Domain\Contract\WorkflowDiscoveryInterface:
+    alias: Koh\AiWorkflows\Infrastructure\Discovery\WorkflowDiscovery
+
+  Koh\AiWorkflows\Domain\Contract\WorkflowInstanceFactoryInterface:
+    alias: Koh\AiWorkflows\Infrastructure\Persistence\WorkflowInstanceFactory

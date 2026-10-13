@@ -1,0 +1,123 @@
+<html data-namespace-typo3-fluid="true"
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
+<f:layout name="Default" />
+<f:section name="Content">
+    <h1><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:start.title" /></h1>
+    <f:form action="execute" method="post">
+        <div class="form-group">
+            <label for="workflowName" class="form-label"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:start.workflowLabel" /></label>
+            <f:form.select id="workflowName" name="workflowName" options="{workflowOptions}" class="form-select" value="{workflowName}" />
+        </div>
+
+        <f:if condition="{selectedWorkflow}">
+            <f:then>
+                <p class="text-body-secondary mt-2">{selectedWorkflow.description}</p>
+
+                <f:if condition="{selectedWorkflow.inputs}">
+                    <f:then>
+                        <fieldset class="mt-4">
+                            <legend><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:start.inputParameters" /></legend>
+                            <f:for each="{selectedWorkflow.inputs}" as="inputDef">
+                                <div class="form-group mt-3">
+                                    <label for="input-{inputDef.name}" class="form-label">
+                                        {inputDef.label}
+                                        <f:if condition="{inputDef.required}">
+                                            <span class="text-danger" title="Required">*</span>
+                                        </f:if>
+                                    </label>
+
+                                    <f:if condition="{inputDef.description}">
+                                        <div class="form-text mb-1">{inputDef.description}</div>
+                                    </f:if>
+
+                                    <f:switch expression="{inputDef.type}">
+                                        <f:case value="text">
+                                            <f:form.textarea
+                                                id="input-{inputDef.name}"
+                                                name="workflowInput[{inputDef.name}]"
+                                                rows="5"
+                                                class="form-control"
+                                                placeholder="{inputDef.placeholder}"
+                                                value="{inputDef.default}" />
+                                        </f:case>
+
+                                        <f:case value="select">
+                                            <select id="input-{inputDef.name}" name="workflowInput[{inputDef.name}]" class="form-select">
+                                                <f:if condition="{inputDef.required} == 0">
+                                                    <option value="">{f:translate(key: 'LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:start.selectPlaceholder')}</option>
+                                                </f:if>
+                                                <f:for each="{inputDef.options}" as="option">
+                                                    <option value="{option}"
+                                                        f:if.condition="{option} == {inputDef.default}"
+                                                        selected="selected">{option}</option>
+                                                </f:for>
+                                            </select>
+                                        </f:case>
+
+                                        <f:case value="boolean">
+                                            <div class="form-check">
+                                                <f:form.checkbox
+                                                    id="input-{inputDef.name}"
+                                                    name="workflowInput[{inputDef.name}]"
+                                                    value="1"
+                                                    checked="{inputDef.default}"
+                                                    class="form-check-input" />
+                                            </div>
+                                        </f:case>
+
+                                        <f:case value="number">
+                                            <f:form.textfield
+                                                id="input-{inputDef.name}"
+                                                name="workflowInput[{inputDef.name}]"
+                                                type="number"
+                                                class="form-control"
+                                                placeholder="{inputDef.placeholder}"
+                                                value="{inputDef.default}"
+                                                additionalAttributes="{step: 'any'}" />
+                                        </f:case>
+
+                                        <f:case value="integer">
+                                            <f:form.textfield
+                                                id="input-{inputDef.name}"
+                                                name="workflowInput[{inputDef.name}]"
+                                                type="number"
+                                                class="form-control"
+                                                placeholder="{inputDef.placeholder}"
+                                                value="{inputDef.default}"
+                                                additionalAttributes="{step: '1'}" />
+                                        </f:case>
+
+                                        <f:defaultCase>
+                                            <f:form.textfield
+                                                id="input-{inputDef.name}"
+                                                name="workflowInput[{inputDef.name}]"
+                                                class="form-control"
+                                                placeholder="{inputDef.placeholder}"
+                                                value="{inputDef.default}" />
+                                        </f:defaultCase>
+                                    </f:switch>
+                                </div>
+                            </f:for>
+                        </fieldset>
+                    </f:then>
+                    <f:else>
+                        <div class="callout callout-info mt-3">
+                            <f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:start.noInputParameters" />
+                        </div>
+                    </f:else>
+                </f:if>
+            </f:then>
+            <f:else>
+                <div class="callout callout-warning mt-3">
+                    <f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:start.selectWorkflowHint" />
+                </div>
+            </f:else>
+        </f:if>
+
+        <div class="mt-4">
+            <f:form.submit value="{f:translate(key: 'LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:start.submitButton')}" class="btn btn-primary" />
+            <f:link.action action="index" class="btn btn-default ms-2"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:button.cancel" /></f:link.action>
+        </div>
+    </f:form>
+</f:section>
+</html>

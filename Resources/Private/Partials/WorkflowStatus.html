@@ -1,0 +1,12 @@
+<html data-namespace-typo3-fluid="true"
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
+<f:switch expression="{status}">
+    <f:case value="pending"><span class="badge bg-secondary"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:status.pending" /></span></f:case>
+    <f:case value="running"><span class="badge bg-primary"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:status.running" /></span></f:case>
+    <f:case value="paused"><span class="badge bg-warning"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:status.paused" /></span></f:case>
+    <f:case value="completed"><span class="badge bg-success"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:status.completed" /></span></f:case>
+    <f:case value="failed"><span class="badge bg-danger"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:status.failed" /></span></f:case>
+    <f:case value="cancelled"><span class="badge bg-dark"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:status.cancelled" /></span></f:case>
+    <f:defaultCase><span class="badge bg-secondary">{status}</span></f:defaultCase>
+</f:switch>
+</html>

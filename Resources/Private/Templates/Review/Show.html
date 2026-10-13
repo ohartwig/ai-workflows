@@ -1,0 +1,41 @@
+<html data-namespace-typo3-fluid="true"
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
+<f:layout name="Default" />
+<f:section name="Content">
+    <h1>{f:translate(key: 'LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:review.showTitle')} {reviewTask.title}</h1>
+    <f:if condition="{reviewTask}">
+        <f:then>
+            <table class="table">
+                <tr><th><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:review.taskId" /></th><td>{reviewTask.uid}</td></tr>
+                <tr><th><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:table.step" /></th><td>{reviewTask.stepId}</td></tr>
+                <tr><th><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:table.status" /></th><td>{reviewTask.status}</td></tr>
+                <f:if condition="{reviewTask.description}"><tr><th><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:table.description" /></th><td>{reviewTask.description}</td></tr></f:if>
+                <f:if condition="{reviewTask.deadline}"><tr><th><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:table.deadline" /></th><td><f:format.date format="Y-m-d H:i">{reviewTask.deadline}</f:format.date></td></tr></f:if>
+            </table>
+            <f:if condition="{reviewTask.contentData}">
+                <h3><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:review.contentToReview" /></h3>
+                <div class="card"><div class="card-body"><pre class="mb-0">{reviewTask.contentData -> f:format.htmlspecialchars()}</pre></div></div>
+            </f:if>
+            <f:if condition="{reviewTask.status} == 'pending'">
+                <div class="mt-4">
+                    <div class="form-group mb-3">
+                        <label for="comment"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:review.comment" /></label>
+                        <textarea id="comment" class="form-control" rows="3" form="approveForm" name="comment"></textarea>
+                    </div>
+                    <f:form action="approve" id="approveForm" method="post" class="d-inline">
+                        <f:form.hidden name="uid" value="{reviewTask.uid}" />
+                        <f:form.submit value="{f:translate(key: 'LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:button.approve')}" class="btn btn-success" />
+                    </f:form>
+                    <f:form action="reject" method="post" class="d-inline ms-2">
+                        <f:form.hidden name="uid" value="{reviewTask.uid}" />
+                        <f:form.hidden name="comment" value="" />
+                        <f:form.submit value="{f:translate(key: 'LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:button.reject')}" class="btn btn-danger" />
+                    </f:form>
+                </div>
+            </f:if>
+            <f:link.action action="index" class="btn btn-default mt-3"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:button.backToReviews" /></f:link.action>
+        </f:then>
+        <f:else><div class="callout callout-warning"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:review.notFound" /></div></f:else>
+    </f:if>
+</f:section>
+</html>

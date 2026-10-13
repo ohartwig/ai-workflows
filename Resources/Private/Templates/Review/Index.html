@@ -1,0 +1,22 @@
+<html data-namespace-typo3-fluid="true"
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
+<f:layout name="Default" />
+<f:section name="Content">
+    <h1><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:review.pendingReviews" /></h1>
+    <f:if condition="{pendingReviews}">
+        <f:then>
+            <table class="table table-striped table-hover">
+                <thead><tr><th><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:table.number" /></th><th><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:table.title" /></th><th><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:table.step" /></th><th><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:table.deadline" /></th><th><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:table.actions" /></th></tr></thead>
+                <tbody>
+                    <f:for each="{pendingReviews}" as="review">
+                        <tr><td>{review.uid}</td><td>{review.title}</td><td>{review.stepId}</td>
+                            <td><f:if condition="{review.deadline}"><f:format.date format="Y-m-d H:i">{review.deadline}</f:format.date></f:if></td>
+                            <td><f:link.action action="show" arguments="{uid: review.uid}" class="btn btn-primary btn-sm"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:button.review" /></f:link.action></td></tr>
+                    </f:for>
+                </tbody>
+            </table>
+        </f:then>
+        <f:else><div class="callout callout-success"><f:translate key="LLL:EXT:ai_workflows/Resources/Private/Language/locallang.xlf:review.noPendingReviews" /></div></f:else>
+    </f:if>
+</f:section>
+</html>
