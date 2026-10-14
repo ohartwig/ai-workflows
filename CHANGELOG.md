@@ -3,6 +3,12 @@
 This package continues `moselwal/ai-workflows` (last release 0.7.13) as
 `koh/ai-workflows` with a fresh history. Releases from 0.8.0 on are listed here.
 
+## [0.8.2](https://git.ole-hartwig.eu/ai-ready-platform/platform/ai-workflows/compare/v0.8.1...v0.8.2) (2026-10-14)
+
+### :bug: Fixes
+
+* **deps:** update dependency symfony/yaml to ^7.4.21 ([247dcdc](https://git.ole-hartwig.eu/ai-ready-platform/platform/ai-workflows/commit/247dcdcba74c65c5869c65c6a252c887c8fe745c))
+
 ## [0.8.1](https://git.ole-hartwig.eu/ai-ready-platform/platform/ai-workflows/compare/v0.8.0...v0.8.1) (2026-10-14)
 
 ### :repeat: Chores
